@@ -3,10 +3,11 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { LogIn } from '../types/login.type';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -28,12 +29,11 @@ export class LoginComponent {
   });
   
   login(): void{
-    console.log(this.loginForm.getRawValue())
     if (this.loginForm.invalid) return;
 
-    const loginInfo = this.loginForm.getRawValue();
+    const loginInfo = this.loginForm.value;
     
-    this.auth.login(loginInfo).subscribe({
+    this.auth.login(loginInfo as LogIn).subscribe({
       next: (response: LogIn) =>{
         if(typeof response === "string")
         localStorage.setItem("token", response);

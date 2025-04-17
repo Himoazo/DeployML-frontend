@@ -1,16 +1,24 @@
 <div class="form-container">
     <p class="title">Welcome back</p>
+    <div class="error"> {{errorDiv}} </div>
     <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
-        <input type="email" id="email" class="input" placeholder="Email" aria-label="email" 
-        formControlName="email" 
-        >
-        <input type="password" id="password" class="input" placeholder="Password" aria-label="password"
-        formControlName="password" 
-        >
+      <div>
+        <input type="email" id="email" class="input" placeholder="Email" aria-label="email" formControlName="email">
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          <small>Email is required and must be valid.</small>
+        </div>
+      </div>
+        
+      <div>
+        <input type="password" id="password" class="input" placeholder="Password" aria-label="password" formControlName="password">
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <small>Password is required.</small>
+        </div>
+      </div>
         <p class="page-link">
         <span class="page-link-label">Forgot Password?</span>
       </p>
-      <button class="form-btn">Log in</button>
+      <button class="form-btn" type="submit" [disabled]="loginForm.invalid">Log in</button>
     </form>
     <p class="sign-up-label">
       Don't have an account?<span class="sign-up-link">Sign up</span>
