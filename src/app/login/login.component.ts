@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { LogIn } from '../types/login.type';
+import { LogIn, Token } from '../types/login.type';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -34,9 +34,8 @@ export class LoginComponent {
     const loginInfo = this.loginForm.value;
     
     this.auth.login(loginInfo as LogIn).subscribe({
-      next: (response: LogIn) =>{
-        if(typeof response === "string")
-        localStorage.setItem("token", response);
+      next: (response: Token) => {
+        localStorage.setItem("token", response.access_token);
         this.router.navigate(["/"]);
       },
       error: (error)=>{

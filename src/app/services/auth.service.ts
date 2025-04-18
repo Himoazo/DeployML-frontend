@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LogIn } from '../types/login.type';
+import { LogIn, Token } from '../types/login.type';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,11 @@ export class AuthService {
   private readonly httpClient = inject(HttpClient)
   
   //logging in
-  login(login: LogIn): Observable<LogIn>{
+  login(login: LogIn): Observable<Token>{
   const body = new HttpParams()
     .set('username', login.email.trim())
     .set('password', login.password.trim());
-    return this.httpClient.post<LogIn>(
+    return this.httpClient.post<Token>(
       this.url + 'auth/jwt/login',
       body.toString(),
       {
