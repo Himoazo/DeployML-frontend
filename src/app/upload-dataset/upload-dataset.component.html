@@ -1,1 +1,12 @@
-<p>upload-dataset works!</p>
+<form (ngSubmit)="uploadDataset()" #datasetForm="ngForm">
+    <div class="error"> {{errorDiv}} </div>
+    <label for="file">File</label>
+    <input type="file" id="file" name="file" (change)="selectFile($event)" accept=".json,.csv,.xlsx,.parquet">
+    <label for="datasetName">datasetName</label>
+    <input type="text" id="datasetName" name="datasetName" [(ngModel)]="datasetName" #datasetNameInput="ngModel" required>
+    <label for="datasetTarget">datasetTarget</label>
+    <input type="text" id="datasetTarget" name="datasetTarget" [(ngModel)]="datasetTarget" #targetInput="ngModel" required>
+    <button [disabled]="!datasetNameInput.valid || !targetInput.valid ||!selectedFile">
+        Ladda upp bild
+    </button>
+</form>

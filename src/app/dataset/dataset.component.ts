@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, Validators } from '@angular/forms';
 import { DatasetService } from '../services/dataset.service';
 import { Dataset } from '../types/dataset.type';
+import { UploadDatasetComponent } from '../upload-dataset/upload-dataset.component';
 
 @Component({
   selector: 'app-dataset',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, UploadDatasetComponent],
   templateUrl: './dataset.component.html',
   styleUrl: './dataset.component.scss'
 })
 export class DatasetComponent {
-  fb = inject(FormBuilder)
+  /* fb = inject(FormBuilder)
   dataService = inject(DatasetService)
   selectedFile: File | null = null;
   datasetName: string = "";
@@ -42,5 +43,5 @@ export class DatasetComponent {
     } else {
       
     }
-  }
+  } */
 }
