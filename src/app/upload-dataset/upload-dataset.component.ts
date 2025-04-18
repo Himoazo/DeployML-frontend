@@ -33,7 +33,7 @@ export class UploadDatasetComponent {
         target: this.datasetTarget.trim()
       }
       this.dataService.upload(dataset).subscribe({
-        next: res => {console.log('Uploaded!', res)},
+        next: res => this.dataService.getDatasets(),
         error: err => {
           console.error('Upload failed', err)
           this.errorDiv = err.statusText;

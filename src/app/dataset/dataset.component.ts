@@ -13,27 +13,15 @@ import { UploadDatasetComponent } from '../upload-dataset/upload-dataset.compone
 })
 export class DatasetComponent {
   dataService = inject(DatasetService);
-  datasets: DatasetInfo[] = [];
 
   ngOnInit() {
-    this.getAllDatasets()
-  }
-
-  getAllDatasets(): void{
-    this.dataService.getDatasets().subscribe({
-      next: data => {
-        this.datasets = data;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    });
+    this.dataService.getDatasets();
   }
 
   deleteDataset(id: string) {
     this.dataService.deleteDataset(id).subscribe({
       next: (response) => {
-        this.datasets = this.datasets.filter(set => set.id != id)
+        this.dataService.getDatasets();
       },
       error: (err) => {
         console.log(err)

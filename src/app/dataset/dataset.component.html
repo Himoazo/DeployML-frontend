@@ -1,6 +1,6 @@
 <app-upload-dataset></app-upload-dataset>
 
-<div *ngFor="let set of datasets">
+<div *ngFor="let set of dataService.datasets()">
     {{set.dataset_name}}
     {{set.target_column}}
     {{set.feature_names}}
