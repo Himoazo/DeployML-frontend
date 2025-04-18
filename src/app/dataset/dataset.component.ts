@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, Validators } from '@angular/forms';
 import { DatasetService } from '../services/dataset.service';
-import { Dataset } from '../types/dataset.type';
+import { Dataset, DatasetInfo } from '../types/dataset.type';
 import { UploadDatasetComponent } from '../upload-dataset/upload-dataset.component';
 
 @Component({
@@ -12,36 +12,32 @@ import { UploadDatasetComponent } from '../upload-dataset/upload-dataset.compone
   styleUrl: './dataset.component.scss'
 })
 export class DatasetComponent {
-  /* fb = inject(FormBuilder)
-  dataService = inject(DatasetService)
-  selectedFile: File | null = null;
-  datasetName: string = "";
-  datasetTarget: string = "";
-  errorDiv: string = "";
+  dataService = inject(DatasetService);
+  datasets: DatasetInfo[] = [];
 
-  selectFile(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
-    }
+  ngOnInit() {
+    this.getAllDatasets()
   }
-  
-  uploadDataset(): void{
-    if (this.selectedFile && this.datasetName && this.datasetTarget) {
-      const dataset: Dataset = {
-        file: this.selectedFile,
-        name: this.datasetName.trim(),
-        target: this.datasetTarget.trim()
+
+  getAllDatasets(): void{
+    this.dataService.getDatasets().subscribe({
+      next: data => {
+        this.datasets = data;
+      },
+      error: (err) => {
+        console.log(err)
       }
-      this.dataService.upload(dataset).subscribe({
-        next: res => {console.log('Uploaded!', res)},
-        error: err => {
-          console.error('Upload failed', err)
-          this.errorDiv = err.statusText;
-        }
-      });
-    } else {
-      
-    }
-  } */
+    });
+  }
+
+  deleteDataset(id: string) {
+    this.dataService.deleteDataset(id).subscribe({
+      next: (response) => {
+        this.datasets = this.datasets.filter(set => set.id != id)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
+  }
 }

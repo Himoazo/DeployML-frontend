@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Dataset } from '../types/dataset.type';
+import { Dataset, DatasetInfo } from '../types/dataset.type';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,19 @@ export class DatasetService {
     newDataset.append("name", dataset.name);
     newDataset.append("target", dataset.target);
     return this.httpClient.post<string>(`${this.url}/upload`, newDataset, {headers})
+  }
+
+  getDatasets(): Observable<DatasetInfo[]>{
+    const token = localStorage.getItem("token");
+    const headers = { Authorization: "bearer " + token }
+
+    return this.httpClient.get<DatasetInfo[]>(`${this.url}/all`, {headers})
+  }
+
+  deleteDataset(id: string): Observable<string>{
+    const token = localStorage.getItem("token");
+    const headers = { Authorization: "bearer " + token }
+
+    return this.httpClient.delete<string>(`${this.url}/delete/${id}`, {headers})
   }
 }
