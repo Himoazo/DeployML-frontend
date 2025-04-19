@@ -1,0 +1,50 @@
+<form [formGroup]="algorithmForm" (ngSubmit)="addAlgorithm()">
+    <div class="form-group">
+      <label for="algorithm_name">Algorithm Name</label>
+      <input type="text" id="algorithm_name" formControlName="algorithm_name">
+      <div *ngIf="algorithmForm.get('algorithm_name')?.invalid && algorithmForm.get('algorithm_name')?.touched">
+        Algorithm name is required
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="lib_class">Library Class</label>
+      <input type="text" id="lib_class" formControlName="lib_class">
+      <div *ngIf="algorithmForm.get('lib_class')?.invalid && algorithmForm.get('lib_class')?.touched">
+        Library class is required
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="task_type">Task Type</label>
+      <select id="task_type" formControlName="task_type">
+        <option value="">Select a task type</option>
+        <option *ngFor="let type of taskTypes" [value]="type">{{ type }}</option>
+      </select>
+      <div *ngIf="algorithmForm.get('task_type')?.invalid && algorithmForm.get('task_type')?.touched">
+        Task type is required
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="description">Description (Optional)</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="default_params">Default Parameters (JSON format, Optional)</label>
+      <textarea id="default_params" formControlName="default_params" 
+                placeholder='{"param1": value1, "param2": value2}'></textarea>
+    </div>
+    
+    <button type="submit" [disabled]="algorithmForm.invalid">Create Algorithm</button>
+  </form>
+
+<div *ngFor="let algo of algorithms">
+    {{algo.algorithm_name}}
+    {{algo.default_params | json}} 
+    {{algo.lib_class}}
+    {{algo.task_type}}
+    {{algo.description}}
+    <button (click)="deleteAlgorithm(algo.id!)">Delete</button>
+</div>
