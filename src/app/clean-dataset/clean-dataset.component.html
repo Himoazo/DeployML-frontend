@@ -1,0 +1,38 @@
+<form (submit)="clean()">
+    <select name="dataset" id="dataset" [(ngModel)]="datasetId">
+        <option *ngFor="let set of datasetService.datasets()" [value]="set.id"> 
+            {{set.dataset_name}} 
+        </option>
+    </select>
+    <div>
+        Missing value option
+        <label>
+          <input type="radio" name="missing" value="drop" [(ngModel)]="missingOption" />
+          Drop
+        </label>
+        <label>
+          <input type="radio" name="missing" value="fill" [(ngModel)]="missingOption" />
+          Fill
+        </label>
+    </div>
+    
+    <div>
+        Drop duplicates?
+        <label>
+          <input type="radio" name="duplicates" [value]="true" [(ngModel)]="duplicates" />
+          Yes
+        </label>
+        <label>
+          <input type="radio" name="duplicates" [value]="false" [(ngModel)]="duplicates" />
+          No
+        </label>
+    </div>
+    <input type="submit" value="Clean">
+</form>
+<div *ngIf="cleanResponse()">
+  <p><strong>Message:</strong> {{ cleanResponse()?.message }}</p>
+  <p><strong>Rows after cleaning:</strong> {{ cleanResponse()?.rows_after_cleaning }}</p>
+  <p><strong>Columns:</strong> {{ cleanResponse()?.columns }}</p>
+  <p><strong>Duplicates removed:</strong> {{ cleanResponse()?.duplicates_removed ? 'Yes' : 'No' }}</p>
+  <p><strong>Missing values handled:</strong> {{ cleanResponse()?.missing_values_handled }}</p>
+</div>

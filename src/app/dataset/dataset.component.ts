@@ -4,10 +4,11 @@ import { FormBuilder, FormsModule, Validators } from '@angular/forms';
 import { DatasetService } from '../services/dataset.service';
 import { Dataset, DatasetInfo } from '../types/dataset.type';
 import { UploadDatasetComponent } from '../upload-dataset/upload-dataset.component';
+import { CleanDatasetComponent } from '../clean-dataset/clean-dataset.component';
 
 @Component({
   selector: 'app-dataset',
-  imports: [CommonModule, FormsModule, UploadDatasetComponent],
+  imports: [CommonModule, FormsModule, UploadDatasetComponent, CleanDatasetComponent],
   templateUrl: './dataset.component.html',
   styleUrl: './dataset.component.scss'
 })
