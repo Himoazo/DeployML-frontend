@@ -1,2 +1,12 @@
 <app-train-model></app-train-model>
 
+<div *ngFor="let model of modelService.models()">
+  File name: {{model.filename}} <br> 
+  Dataset: {{model.dataset_name}} <br>
+  Algorithm: {{model.algorithm_name}} <br>
+  Model name: {{model.model_name}} <br>
+  Metric: {{model.metric}} <br>
+  Score: {{model.score}} <br>
+  <a [href]="modelFile" download="{{model.filename}}">Download</a>
+  ----------------------------------
+</div>

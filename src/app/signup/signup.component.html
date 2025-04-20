@@ -1,0 +1,23 @@
+<div class="form-container">
+    <p class="title">Register</p>
+    <div class="error"> {{errorDiv}} </div>
+    <form class="form" [formGroup]="signUpForm" (ngSubmit)="register()">
+      <div>
+        <input type="email" id="email" class="input" placeholder="Email" aria-label="email" formControlName="email">
+        <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+          <small>Email is required and must be valid.</small>
+        </div>
+      </div>
+        
+      <div>
+        <input type="password" id="password" class="input" placeholder="Password" aria-label="password" formControlName="password">
+        <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+          <small>Password is required.</small>
+        </div>
+      </div>
+        <p class="page-link">
+        <span class="page-link-label">Forgot Password?</span>
+      </p>
+      <button class="form-btn" type="submit" [disabled]="signUpForm.invalid">Log in</button>
+    </form>
+  </div>

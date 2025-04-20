@@ -56,6 +56,7 @@ export class TrainModelComponent {
       
       this.modelService.train(request).subscribe({
         next: response => {
+          this.modelService.getModels();
           console.log("Model was trained: ", response)
         },
         error: err => {
