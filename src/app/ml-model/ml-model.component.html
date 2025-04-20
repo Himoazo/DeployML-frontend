@@ -8,5 +8,6 @@
   Metric: {{model.metric}} <br>
   Score: {{model.score}} <br>
   <a [href]="modelFile" download="{{model.filename}}">Download</a>
+  <button (click)="deleteModel(model.id)">Delete</button>
   ----------------------------------
 </div>

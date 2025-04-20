@@ -34,4 +34,15 @@ export class MLModelComponent {
       }
     })
   }
+
+  deleteModel(id: string): void{
+    this.modelService.delete(id).subscribe({
+      next: response => {
+        this.modelService.getModels();
+      },
+      error: err => {
+        
+      }
+    });
+  }  
 }

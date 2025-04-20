@@ -37,4 +37,11 @@ export class MLModelService {
 
     return this.httpClient.get(`${this.url}/download/${id}`, { headers, responseType: 'blob' })
   }
+
+  delete(id: string): Observable<string>{
+    const token = localStorage.getItem("token");
+    const headers = { Authorization: "bearer " + token }
+    
+    return this.httpClient.delete<string>(`${this.url}/delete/${id}`, {headers})
+  }
 }
