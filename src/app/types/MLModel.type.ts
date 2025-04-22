@@ -18,3 +18,9 @@ export type TrainedModel = {
   dataset_name: string;
   algorithm_name: string;
 }
+
+export type RunInput = number[][];
+
+export type RunResponse = {
+  predictions: number[];
+}

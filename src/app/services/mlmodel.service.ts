@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { TrainedModel, TrainRequest } from '../types/MLModel.type';
+import { RunInput, RunResponse, TrainedModel, TrainRequest } from '../types/MLModel.type';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -36,6 +36,13 @@ export class MLModelService {
     const headers = { Authorization: "bearer " + token }
 
     return this.httpClient.get(`${this.url}/download/${id}`, { headers, responseType: 'blob' })
+  }
+
+  run(APIKey: string, model_id: string, input: RunInput): Observable<RunResponse>{
+    console.log(APIKey) // Vv8rhCY9ZWVWwGsx8ahf-CeUitL--6YBrSfXlreSM5w
+    const headers = new HttpHeaders({ 'x-key': APIKey })
+    console.log(headers) // _HttpHeaders {headers: undefined, normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}
+    return this.httpClient.post<RunResponse>(`${this.url}/run/${model_id}`, input, {headers})
   }
 
   delete(id: string): Observable<string>{

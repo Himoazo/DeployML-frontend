@@ -1,1 +1,18 @@
-<p>run-model works!</p>
+<form (ngSubmit)="runModel()">
+    <select name="model" id="model" [(ngModel)]="modelObject" (change)="inputIndexes()" required>
+        <option value="" disabled>Select model</option>
+        <option *ngFor="let mod of modelService.models()" [ngValue]="mod"> 
+            {{mod.model_name}} 
+        </option>
+    </select>
+    <div *ngFor="let feature of featuresArr; let i = index">
+        <label> {{feature}} </label>
+        <input type="number" [(ngModel)]="inputValues[i]" name="feature-{{i}}" required>
+    </div>
+
+    <input type="submit" value="Run">
+</form>
+
+<div *ngIf="result">
+    <span>{{result.predictions}}</span>
+</div>
