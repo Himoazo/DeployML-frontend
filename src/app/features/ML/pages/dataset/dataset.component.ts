@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, Validators } from '@angular/forms';
-import { DatasetService } from '../services/dataset.service';
-import { Dataset, DatasetInfo } from '../types/dataset.type';
-import { UploadDatasetComponent } from '../upload-dataset/upload-dataset.component';
-import { CleanDatasetComponent } from '../clean-dataset/clean-dataset.component';
+import { UploadDatasetComponent } from '../../components/upload-dataset/upload-dataset.component';
+import { CleanDatasetComponent } from '../../components/clean-dataset/clean-dataset.component';
+import { DatasetService } from '../../services/dataset.service';
+
 
 @Component({
   selector: 'app-dataset',

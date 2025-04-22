@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { RunInput, RunResponse, TrainedModel, TrainRequest } from '../types/MLModel.type';
 import { Observable } from 'rxjs';
+import { RunInput, RunResponse, TrainedModel, TrainRequest } from '../types/MLModel.type';
 
 @Injectable({
   providedIn: 'root'

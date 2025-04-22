@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { AlgorithmInfo } from '../types/algorithms.type';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AlgorithmInfo } from '../types/algorithms.type';
 
 @Injectable({
   providedIn: 'root'

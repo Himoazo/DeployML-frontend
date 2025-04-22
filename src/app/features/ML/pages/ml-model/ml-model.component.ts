@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TrainModelComponent } from '../train-model/train-model.component';
-import { MLModelService } from '../services/mlmodel.service';
+import { TrainModelComponent } from '../../components/train-model/train-model.component';
+import { MLModelService } from '../../services/mlmodel.service';
+
 
 @Component({
   selector: 'app-ml-model',

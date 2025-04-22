@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { AlgorithmInfo } from '../types/algorithms.type';
-import { AlgorithmService } from '../services/algorithm.service';
+import { AlgorithmInfo } from '../../types/algorithms.type';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AlgorithmService } from '../../services/algorithm.service';
 
 @Component({
   selector: 'app-algorithm',

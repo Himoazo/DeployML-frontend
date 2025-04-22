@@ -1,8 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { DatasetService } from '../services/dataset.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CleanRequest, CleanResponse } from '../types/dataset.type';
+import { DatasetService } from '../../services/dataset.service';
+import { CleanRequest, CleanResponse } from '../../types/dataset.type';
+
 
 @Component({
   selector: 'app-clean-dataset',

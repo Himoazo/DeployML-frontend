@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { MLModelService } from '../services/mlmodel.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DatasetService } from '../services/dataset.service';
-import { TrainedModel, RunResponse, RunInput } from '../types/MLModel.type';
-import { DatasetInfo } from '../types/dataset.type';
-import { AuthService } from '../services/auth.service';
+import { MLModelService } from '../../services/mlmodel.service';
+import { DatasetService } from '../../services/dataset.service';
+import { AuthService } from '../../../Authentication/services/auth.service';
+import { RunInput, RunResponse, TrainedModel } from '../../types/MLModel.type';
+import { DatasetInfo } from '../../types/dataset.type';
 
 @Component({
   selector: 'app-run-model',

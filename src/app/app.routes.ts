@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
-import {LoginComponent} from './login/login.component'
-import { HomeComponent } from './home/home.component';
-import { DatasetComponent } from './dataset/dataset.component';
-import { AlgorithmComponent } from './algorithm/algorithm.component';
-import { MLModelComponent } from './ml-model/ml-model.component';
-import { SignupComponent } from './signup/signup.component';
-import { RunModelComponent } from './run-model/run-model.component';
+import { DatasetComponent } from './features/ML/pages/dataset/dataset.component';
+import { AlgorithmComponent } from './features/ML/pages/algorithm/algorithm.component';
+import { MLModelComponent } from './features/ML/pages/ml-model/ml-model.component';
+import { LoginComponent } from './features/Authentication/pages/login/login.component';
+import { SignupComponent } from './features/Authentication/pages/signup/signup.component';
+import { HomeComponent } from './features/home/home.component';
+import { RunModelComponent } from './features/ML/pages/run-model/run-model.component';
+
 export const routes: Routes = [
     { path: "", component: HomeComponent },
     { path: "signup", component: SignupComponent },

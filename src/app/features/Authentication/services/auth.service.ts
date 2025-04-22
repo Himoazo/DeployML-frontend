@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LogIn, SignUp, Token, UserInfo } from '../types/auth.type';
 
+
 @Injectable({
   providedIn: 'root'
 })

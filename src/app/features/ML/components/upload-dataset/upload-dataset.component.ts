@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { DatasetService } from '../services/dataset.service';
 import { FormBuilder, FormsModule, Validators } from '@angular/forms';
-import { Dataset } from '../types/dataset.type';
 import { CommonModule } from '@angular/common';
+import { DatasetService } from '../../services/dataset.service';
+import { Dataset } from '../../types/dataset.type';
 
 @Component({
   selector: 'app-upload-dataset',

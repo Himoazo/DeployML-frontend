@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DatasetService } from '../services/dataset.service';
-import { AlgorithmService } from '../services/algorithm.service';
-import { AlgorithmInfo } from '../types/algorithms.type';
-import { TrainRequest } from '../types/MLModel.type';
-import { MLModelService } from '../services/mlmodel.service';
+import { DatasetService } from '../../services/dataset.service';
+import { AlgorithmService } from '../../services/algorithm.service';
+import { MLModelService } from '../../services/mlmodel.service';
+import { AlgorithmInfo } from '../../types/algorithms.type';
+import { TrainRequest } from '../../types/MLModel.type';
+
 
 
 @Component({
