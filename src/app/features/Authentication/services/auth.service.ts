@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { LogIn, SignUp, Token, UserInfo } from '../types/auth.type';
 
 
@@ -29,14 +29,30 @@ export class AuthService {
     return this.httpClient.post<SignUp>(`${this.url}/auth/register`, signUp)
   }
 
-  getMyInfo(): void{
-    const token = localStorage.getItem("token");
-    const headers = { Authorization: "bearer " + token }
-
-    this.httpClient.get<UserInfo>(`${this.url}/users/me`, {withCredentials: true}).subscribe({
+  /* getMyInfo(): Observable<UserInfo>{
+      return this.httpClient.get<UserInfo>(`${this.url}/users/me`, {withCredentials: true}).subscribe({
       next: response => this._userInfo.set(response),
       error: err => console.log(err)
     })
+  } */
+  
+  getMyInfo(): Observable<UserInfo>{
+    return this.httpClient.get<UserInfo>(`${this.url}/users/me`, { withCredentials: true })
+      .pipe(
+        tap(response => this._userInfo.set(response)),
+        catchError(err => {
+          console.log(err);
+          this._userInfo.set(null);
+          return of(null as any)
+        })
+    )
+    }
+
+  isLoggedIn(): Observable<boolean> {
+    return this.getMyInfo().pipe(
+      map(user => !!user),
+      catchError(() => of(false))
+    );
   }
 }
 

@@ -6,13 +6,21 @@ import { LoginComponent } from './features/Authentication/pages/login/login.comp
 import { SignupComponent } from './features/Authentication/pages/signup/signup.component';
 import { HomeComponent } from './features/home/home.component';
 import { RunModelComponent } from './features/ML/pages/run-model/run-model.component';
+import { authGuard } from './core/guards/auth.guard';
+import { DashboardComponent } from './features/ML/pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
     { path: "", component: HomeComponent },
     { path: "signup", component: SignupComponent },
     { path: "login", component: LoginComponent },
-    { path: "dataset", component: DatasetComponent },
-    { path: "algorithm", component: AlgorithmComponent },
-    { path: "model", component: MLModelComponent },
-    { path: "run", component: RunModelComponent }
+    {
+        path: "ml", component: DashboardComponent, canActivate: [authGuard],
+        children: [
+            {path: "", redirectTo: "dataset", pathMatch: "full"},
+            { path: "dataset", component: DatasetComponent },
+            { path: "algorithm", component: AlgorithmComponent },
+            { path: "model", component: MLModelComponent },
+            { path: "run", component: RunModelComponent}
+        ]
+    }
 ];
