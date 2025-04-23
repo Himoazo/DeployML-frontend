@@ -14,20 +14,20 @@ export class AlgorithmService {
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
 
-    return this.httpClient.post<string>(`${this.url}`, newAlgo, { headers })
+    return this.httpClient.post<string>(`${this.url}`, newAlgo, { withCredentials: true })
   }
 
   getAlgorithms(): Observable<AlgorithmInfo[]>{
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
 
-    return this.httpClient.get<AlgorithmInfo[]>(`${this.url}`, { headers })
+    return this.httpClient.get<AlgorithmInfo[]>(`${this.url}`, { withCredentials: true })
   }
 
   deleteAlgo(id: string): Observable<string>{
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
 
-    return this.httpClient.delete<string>(`${this.url}/${id}`, {headers})
+    return this.httpClient.delete<string>(`${this.url}/${id}`, {withCredentials: true})
   }
 }

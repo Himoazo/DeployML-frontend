@@ -17,7 +17,7 @@ export class DatasetService {
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
 
-    this.httpClient.get<DatasetInfo[]>(`${this.url}/all`, { headers }).subscribe({
+    this.httpClient.get<DatasetInfo[]>(`${this.url}/all`, { withCredentials: true }).subscribe({
       next: response => this._datasets.set(response),
       error: err => console.log(err)
     });
@@ -31,19 +31,19 @@ export class DatasetService {
     newDataset.append("file", dataset.file);
     newDataset.append("name", dataset.name);
     newDataset.append("target", dataset.target);
-    return this.httpClient.post<string>(`${this.url}/upload`, newDataset, {headers})
+    return this.httpClient.post<string>(`${this.url}/upload`, newDataset, {withCredentials: true})
   }
 
   deleteDataset(id: string): Observable<string>{
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
 
-    return this.httpClient.delete<string>(`${this.url}/delete/${id}`, {headers})
+    return this.httpClient.delete<string>(`${this.url}/delete/${id}`, {withCredentials: true})
   }
 
   cleanDataset(cleanRequest: CleanRequest): Observable<CleanResponse>{
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
-    return this.httpClient.put<CleanResponse>(`${this.url}/clean`, cleanRequest, {headers})
+    return this.httpClient.put<CleanResponse>(`${this.url}/clean`, cleanRequest, {withCredentials: true})
   }
 }

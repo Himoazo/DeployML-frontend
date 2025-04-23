@@ -14,16 +14,14 @@ export class AuthService {
   readonly userInfo = this._userInfo.asReadonly();
 
   //logging in
-  login(login: LogIn): Observable<Token>{
+  login(login: LogIn): Observable<void>{
   const body = new HttpParams()
     .set('username', login.email.trim())
     .set('password', login.password.trim());
-    return this.httpClient.post<Token>(
+    return this.httpClient.post<void>(
       this.url + '/auth/jwt/login',
       body.toString(),
-      {
-        headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-      }
+      {headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }), withCredentials: true }
     );
   }
 
@@ -35,7 +33,7 @@ export class AuthService {
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
 
-    this.httpClient.get<UserInfo>(`${this.url}/users/me`, {headers}).subscribe({
+    this.httpClient.get<UserInfo>(`${this.url}/users/me`, {withCredentials: true}).subscribe({
       next: response => this._userInfo.set(response),
       error: err => console.log(err)
     })

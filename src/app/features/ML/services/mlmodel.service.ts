@@ -16,7 +16,7 @@ export class MLModelService {
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
 
-    this.httpClient.get<TrainedModel[]>(`${this.url}/all`, { headers }).subscribe({
+    this.httpClient.get<TrainedModel[]>(`${this.url}/all`, { withCredentials: true }).subscribe({
       next: response => {
         this._models.set(response);
       },
@@ -28,27 +28,26 @@ export class MLModelService {
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
 
-    return this.httpClient.post<string>(`${this.url}/train`, request, { headers })
+    return this.httpClient.post<string>(`${this.url}/train`, request, { withCredentials: true })
   }
 
   download(id: string): Observable<Blob>{
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
 
-    return this.httpClient.get(`${this.url}/download/${id}`, { headers, responseType: 'blob' })
+    return this.httpClient.get(`${this.url}/download/${id}`, { withCredentials: true, responseType: 'blob' })
   }
 
   run(APIKey: string, model_id: string, input: RunInput): Observable<RunResponse>{
-    console.log(APIKey) // Vv8rhCY9ZWVWwGsx8ahf-CeUitL--6YBrSfXlreSM5w
     const headers = new HttpHeaders({ 'x-key': APIKey })
-    console.log(headers) // _HttpHeaders {headers: undefined, normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}
-    return this.httpClient.post<RunResponse>(`${this.url}/run/${model_id}`, input, {headers})
+    console.log(headers) 
+    return this.httpClient.post<RunResponse>(`${this.url}/run/${model_id}`, input, {headers, withCredentials: true})
   }
 
   delete(id: string): Observable<string>{
     const token = localStorage.getItem("token");
     const headers = { Authorization: "bearer " + token }
     
-    return this.httpClient.delete<string>(`${this.url}/delete/${id}`, {headers})
+    return this.httpClient.delete<string>(`${this.url}/delete/${id}`, {withCredentials: true})
   }
 }
