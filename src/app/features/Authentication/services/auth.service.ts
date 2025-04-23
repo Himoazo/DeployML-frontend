@@ -12,6 +12,7 @@ export class AuthService {
   private readonly httpClient = inject(HttpClient)
   private readonly _userInfo = signal<UserInfo | null>(null);
   readonly userInfo = this._userInfo.asReadonly();
+  readonly userLoggedIn = signal<boolean>(false);
 
   //logging in
   login(login: LogIn): Observable<void>{
@@ -22,19 +23,14 @@ export class AuthService {
       this.url + '/auth/jwt/login',
       body.toString(),
       {headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }), withCredentials: true }
+    ).pipe(
+      tap(() => this.userLoggedIn.set(true))
     );
   }
 
   register(signUp: SignUp): Observable<SignUp>{
     return this.httpClient.post<SignUp>(`${this.url}/auth/register`, signUp)
   }
-
-  /* getMyInfo(): Observable<UserInfo>{
-      return this.httpClient.get<UserInfo>(`${this.url}/users/me`, {withCredentials: true}).subscribe({
-      next: response => this._userInfo.set(response),
-      error: err => console.log(err)
-    })
-  } */
   
   getMyInfo(): Observable<UserInfo>{
     return this.httpClient.get<UserInfo>(`${this.url}/users/me`, { withCredentials: true })
@@ -49,10 +45,36 @@ export class AuthService {
     }
 
   isLoggedIn(): Observable<boolean> {
+    
     return this.getMyInfo().pipe(
-      map(user => !!user),
-      catchError(() => of(false))
+      map(user => {
+        const logged = !!user;
+        this.userLoggedIn.set(logged);
+        return logged
+      }),
+      catchError(() => {
+        this.userLoggedIn.set(false); 
+        return of(false);
+      })
     );
+  }
+
+  isAdmin(): Observable<boolean>{
+    return this.getMyInfo().pipe(
+      map(user => !!user && user.is_superuser === true),
+      catchError(()=> of(false))
+    );
+  }
+
+  logOut(): Observable<boolean>{
+    return this.httpClient.post(`${this.url}/auth/jwt/logout`, null, { withCredentials: true })
+      .pipe(
+        map(() => {
+          this.userLoggedIn.set(false);
+          return true;
+        }),
+        catchError(() => of(false))
+    )
   }
 }
 

@@ -1,1 +1,9 @@
-<p>header works!</p>
+<ul>
+    <li><a routerLink="" routerLinkActive="active">Hem</a></li>
+    <li *ngIf="auth.userLoggedIn()"><a routerLink="ml" routerLinkActive="active">Dashboard</a></li>
+    <li *ngIf="!auth.userLoggedIn()"><a routerLink="login" routerLinkActive="active">Logga in</a></li>
+    <li *ngIf="!auth.userLoggedIn()"><a routerLink="signup" routerLinkActive="active">Skapa konto</a></li>
+    <li *ngIf="auth.userLoggedIn()"><a (click)="logOut()">Logga ut</a></li>
+</ul>
+
+<div> {{auth.userLoggedIn()}} </div>

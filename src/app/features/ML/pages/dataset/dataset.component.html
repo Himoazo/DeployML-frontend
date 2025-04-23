@@ -3,7 +3,7 @@
 <div *ngFor="let set of dataService.datasets()">
     {{set.dataset_name}}
     {{set.target_column}}
-    {{set.feature_names}}
+    <!-- {{set.feature_names}} -->
     {{set.target_column}}
     <button (click)="deleteDataset(set.id)">Delete</button>
 </div>

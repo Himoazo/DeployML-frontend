@@ -1,17 +1,17 @@
-import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { inject } from '@angular/core';
 import { AuthService } from '../../features/Authentication/services/auth.service';
 import { tap } from 'rxjs';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const adminGuard: CanActivateFn = (route, state) => {
   const auth = inject(AuthService)
   const router = inject(Router)
 
-  return auth.isLoggedIn().pipe(
-    tap(isLoggedIn => {
-      if (!isLoggedIn) {
-        router.navigate(["/"]);
+  return auth.isAdmin().pipe(
+    tap(isAdmin => {
+      if (!isAdmin) {
+        router.navigate(["/ml"])
       }
     })
-  )
+  );
 };
