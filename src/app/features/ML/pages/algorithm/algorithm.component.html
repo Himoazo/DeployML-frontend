@@ -1,50 +1,113 @@
-<form [formGroup]="algorithmForm" (ngSubmit)="addAlgorithm()">
-    <div class="form-group">
-      <label for="algorithm_name">Algorithm Name</label>
-      <input type="text" id="algorithm_name" formControlName="algorithm_name">
-      <div *ngIf="algorithmForm.get('algorithm_name')?.invalid && algorithmForm.get('algorithm_name')?.touched">
-        Algorithm name is required
+<div class="container mx-auto p-6 max-w-4xl">
+  <!-- Algorithm Form -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+    <h2 class="text-xl font-semibold text-gray-800 mb-6">Add New Algorithm</h2>
+    
+    <form [formGroup]="algorithmForm" (ngSubmit)="addAlgorithm()" class="space-y-6">
+      <div class="space-y-2">
+        <label for="algorithm_name" class="block text-sm font-medium text-gray-700">Algorithm Name</label>
+        <input 
+          type="text" 
+          id="algorithm_name" 
+          formControlName="algorithm_name"
+          class="block w-full px-4 py-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm">
+        <div *ngIf="algorithmForm.get('algorithm_name')?.invalid && algorithmForm.get('algorithm_name')?.touched" class="text-sm text-red-600 mt-1">
+          Algorithm name is required
+        </div>
+      </div>
+      
+      <div class="space-y-2">
+        <label for="lib_class" class="block text-sm font-medium text-gray-700">Library Class</label>
+        <input 
+          type="text" 
+          id="lib_class" 
+          formControlName="lib_class"
+          class="block w-full px-4 py-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm">
+        <div *ngIf="algorithmForm.get('lib_class')?.invalid && algorithmForm.get('lib_class')?.touched" class="text-sm text-red-600 mt-1">
+          Library class is required
+        </div>
+      </div>
+      
+      <div class="space-y-2">
+        <label for="task_type" class="block text-sm font-medium text-gray-700">Task Type</label>
+        <select 
+          id="task_type" 
+          formControlName="task_type"
+          class="block w-full px-4 py-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm">
+          <option value="">Select a task type</option>
+          <option *ngFor="let type of taskTypes" [value]="type">{{ type }}</option>
+        </select>
+        <div *ngIf="algorithmForm.get('task_type')?.invalid && algorithmForm.get('task_type')?.touched" class="text-sm text-red-600 mt-1">
+          Task type is required
+        </div>
+      </div>
+      
+      <div class="space-y-2">
+        <label for="description" class="block text-sm font-medium text-gray-700">Description (Optional)</label>
+        <textarea 
+          id="description" 
+          formControlName="description"
+          rows="3"
+          class="block w-full px-4 py-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm"></textarea>
+      </div>
+      
+      <div class="space-y-2">
+        <label for="default_params" class="block text-sm font-medium text-gray-700">Default Parameters (JSON format, Optional)</label>
+        <textarea 
+          id="default_params" 
+          formControlName="default_params" 
+          placeholder='{"param1": value1, "param2": value2}'
+          rows="4"
+          class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white font-mono text-sm shadow-sm"></textarea>
+      </div>
+      
+      <button 
+        type="submit" 
+        [disabled]="algorithmForm.invalid"
+        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+        Create Algorithm
+      </button>
+    </form>
+  </div>
+  
+  <!-- Algorithm List -->
+  <div class="bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-xl font-semibold text-gray-800 mb-6">Available Algorithms</h2>
+    
+    <div class="space-y-4">
+      <div *ngFor="let algo of algorithms" class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 class="font-medium text-lg text-gray-800">{{algo.algorithm_name}}</h3>
+            <p class="text-sm text-gray-600 mt-1">{{algo.description}}</p>
+          </div>
+          <button 
+            (click)="deleteAlgorithm(algo.id!)" 
+            class="text-red-600 hover:text-red-800 hover:bg-red-50 px-3 py-1 rounded transition-colors">
+            Delete
+          </button>
+        </div>
+        
+        <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div>
+            <span class="text-gray-500">Library Class:</span>
+            <span class="ml-2 text-gray-800 font-medium">{{algo.lib_class}}</span>
+          </div>
+          <div>
+            <span class="text-gray-500">Task Type:</span>
+            <span class="ml-2 text-gray-800 font-medium">{{algo.task_type}}</span>
+          </div>
+          <div *ngIf="algo.default_params" class="md:col-span-2">
+            <span class="text-gray-500">Default Parameters:</span>
+            <div class="mt-1 bg-gray-50 p-2 rounded font-mono text-xs">{{algo.default_params | json}}</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Empty state when no algorithms -->
+      <div *ngIf="algorithms.length === 0" class="text-center py-8 text-gray-500">
+        No algorithms available. Create an algorithm to get started.
       </div>
     </div>
-    
-    <div class="form-group">
-      <label for="lib_class">Library Class</label>
-      <input type="text" id="lib_class" formControlName="lib_class">
-      <div *ngIf="algorithmForm.get('lib_class')?.invalid && algorithmForm.get('lib_class')?.touched">
-        Library class is required
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <label for="task_type">Task Type</label>
-      <select id="task_type" formControlName="task_type">
-        <option value="">Select a task type</option>
-        <option *ngFor="let type of taskTypes" [value]="type">{{ type }}</option>
-      </select>
-      <div *ngIf="algorithmForm.get('task_type')?.invalid && algorithmForm.get('task_type')?.touched">
-        Task type is required
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <label for="description">Description (Optional)</label>
-      <textarea id="description" formControlName="description"></textarea>
-    </div>
-    
-    <div class="form-group">
-      <label for="default_params">Default Parameters (JSON format, Optional)</label>
-      <textarea id="default_params" formControlName="default_params" 
-                placeholder='{"param1": value1, "param2": value2}'></textarea>
-    </div>
-    
-    <button type="submit" [disabled]="algorithmForm.invalid">Create Algorithm</button>
-  </form>
-
-<div *ngFor="let algo of algorithms">
-    {{algo.algorithm_name}}
-    {{algo.default_params | json}} 
-    {{algo.lib_class}}
-    {{algo.task_type}}
-    {{algo.description}}
-    <button (click)="deleteAlgorithm(algo.id!)">Delete</button>
+  </div>
 </div>

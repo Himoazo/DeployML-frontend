@@ -9,6 +9,8 @@ import { RunModelComponent } from './features/ML/pages/run-model/run-model.compo
 import { authGuard } from './core/guards/auth.guard';
 import { DashboardComponent } from './features/ML/pages/dashboard/dashboard.component';
 import { adminGuard } from './core/guards/admin.guard';
+import { AppComponent } from './app.component';
+import { APIComponent } from './features/API/pages/api/api.component';
 
 export const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -21,7 +23,8 @@ export const routes: Routes = [
             { path: "dataset", component: DatasetComponent },
             { path: "algorithm", component: AlgorithmComponent, canActivate: [adminGuard] },
             { path: "model", component: MLModelComponent },
-            { path: "run", component: RunModelComponent}
+            { path: "run", component: RunModelComponent },
+            { path: "api", component: APIComponent }
         ]
     }
 ];

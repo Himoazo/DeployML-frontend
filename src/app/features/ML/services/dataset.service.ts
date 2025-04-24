@@ -14,9 +14,6 @@ export class DatasetService {
   readonly datasets = this._datasets.asReadonly();
   
   getDatasets(): void{
-    const token = localStorage.getItem("token");
-    const headers = { Authorization: "bearer " + token }
-
     this.httpClient.get<DatasetInfo[]>(`${this.url}/all`, { withCredentials: true }).subscribe({
       next: response => this._datasets.set(response),
       error: err => console.log(err)
@@ -24,9 +21,6 @@ export class DatasetService {
   }
 
   upload(dataset: Dataset): Observable<any>{
-    const token = localStorage.getItem("token");
-    const headers = { Authorization: "bearer " + token }
-    
     const newDataset: FormData = new FormData();
     newDataset.append("file", dataset.file);
     newDataset.append("name", dataset.name);
@@ -35,15 +29,10 @@ export class DatasetService {
   }
 
   deleteDataset(id: string): Observable<string>{
-    const token = localStorage.getItem("token");
-    const headers = { Authorization: "bearer " + token }
-
     return this.httpClient.delete<string>(`${this.url}/delete/${id}`, {withCredentials: true})
   }
 
   cleanDataset(cleanRequest: CleanRequest): Observable<CleanResponse>{
-    const token = localStorage.getItem("token");
-    const headers = { Authorization: "bearer " + token }
     return this.httpClient.put<CleanResponse>(`${this.url}/clean`, cleanRequest, {withCredentials: true})
   }
 }

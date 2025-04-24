@@ -12,7 +12,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   auth = inject(AuthService)
   router = inject(Router)
-
+  mobileMenuOpen = false;
 
   ngOnInit() {
     this.auth.isLoggedIn().subscribe({});

@@ -23,6 +23,7 @@ export class RunModelComponent {
   inputValues: number[] = [];
   runInput: string = "";
   result: RunResponse | null = null;
+  errorMsg: string = "";
 
   ngOnInit() {
     this.modelService.getModels();
@@ -50,11 +51,16 @@ export class RunModelComponent {
         this.result = response;
       },
       error: err => {
-        
+        this.errorMsg = "Det gick inte att köra ml modellen"
       }
     }); 
     } else {
-      console.log("error running model");
+      if (!APIKey) {
+        this.errorMsg = "API nyckeln saknars"
+      }
+      if (!this.modelObject) {
+        this.errorMsg = "Tränad modell saknars"
+      }
       return
     }
   }

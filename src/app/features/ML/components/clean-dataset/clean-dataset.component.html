@@ -1,38 +1,98 @@
-<form (submit)="clean()">
-    <select name="dataset" id="dataset" [(ngModel)]="datasetId">
+<div class="max-w-md mx-auto p-6">
+  <form (submit)="clean()" class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h2 class="text-xl font-semibold text-gray-800 mb-6">Data Cleaning Options</h2>
+    
+    <div class="mb-6">
+      <label for="dataset" class="block text-sm font-medium text-gray-700 mb-2">Select Dataset</label>
+      <select 
+        name="dataset" 
+        id="dataset" 
+        [(ngModel)]="datasetId"
+        class="block w-full px-4 py-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm">
         <option *ngFor="let set of datasetService.datasets()" [value]="set.id"> 
             {{set.dataset_name}} 
         </option>
-    </select>
-    <div>
-        Missing value option
-        <label>
-          <input type="radio" name="missing" value="drop" [(ngModel)]="missingOption" />
-          Drop
-        </label>
-        <label>
-          <input type="radio" name="missing" value="fill" [(ngModel)]="missingOption" />
-          Fill
-        </label>
+      </select>
     </div>
     
-    <div>
-        Drop duplicates?
-        <label>
-          <input type="radio" name="duplicates" [value]="true" [(ngModel)]="duplicates" />
-          Yes
+    <div class="mb-6">
+      <p class="block text-sm font-medium text-gray-700 mb-3">Missing Value Option</p>
+      <div class="flex space-x-6">
+        <label class="inline-flex items-center">
+          <input 
+            type="radio" 
+            name="missing" 
+            value="drop" 
+            [(ngModel)]="missingOption"
+            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" />
+          <span class="ml-2 text-gray-700">Drop</span>
         </label>
-        <label>
-          <input type="radio" name="duplicates" [value]="false" [(ngModel)]="duplicates" />
-          No
+        <label class="inline-flex items-center">
+          <input 
+            type="radio" 
+            name="missing" 
+            value="fill" 
+            [(ngModel)]="missingOption"
+            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" />
+          <span class="ml-2 text-gray-700">Fill</span>
         </label>
+      </div>
     </div>
-    <input type="submit" value="Clean">
-</form>
-<div *ngIf="cleanResponse()">
-  <p><strong>Message:</strong> {{ cleanResponse()?.message }}</p>
-  <p><strong>Rows after cleaning:</strong> {{ cleanResponse()?.rows_after_cleaning }}</p>
-  <p><strong>Columns:</strong> {{ cleanResponse()?.columns }}</p>
-  <p><strong>Duplicates removed:</strong> {{ cleanResponse()?.duplicates_removed ? 'Yes' : 'No' }}</p>
-  <p><strong>Missing values handled:</strong> {{ cleanResponse()?.missing_values_handled }}</p>
+    
+    <div class="mb-6">
+      <p class="block text-sm font-medium text-gray-700 mb-3">Drop Duplicates?</p>
+      <div class="flex space-x-6">
+        <label class="inline-flex items-center">
+          <input 
+            type="radio" 
+            name="duplicates" 
+            [value]="true" 
+            [(ngModel)]="duplicates"
+            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" />
+          <span class="ml-2 text-gray-700">Yes</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input 
+            type="radio" 
+            name="duplicates" 
+            [value]="false" 
+            [(ngModel)]="duplicates"
+            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" />
+          <span class="ml-2 text-gray-700">No</span>
+        </label>
+      </div>
+    </div>
+    
+    <button 
+      type="submit" 
+      class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150">
+      Clean Dataset
+    </button>
+  </form>
+  
+  <div *ngIf="cleanResponse()" class="bg-green-50 border border-green-200 rounded-lg p-6">
+    <h3 class="text-lg font-medium text-green-900 mb-4">Cleaning Results</h3>
+    <div class="space-y-3 text-sm">
+      <div class="flex justify-between">
+        <span class="font-medium text-green-700">Message:</span>
+        <span class="text-gray-800">{{ cleanResponse()?.message }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-medium text-green-700">Rows after cleaning:</span>
+        <span class="text-gray-800">{{ cleanResponse()?.rows_after_cleaning }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-medium text-green-700">Columns:</span>
+        <span class="text-gray-800">{{ cleanResponse()?.columns }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-medium text-green-700">Duplicates removed:</span>
+        <span class="text-gray-800">{{ cleanResponse()?.duplicates_removed ? 'Yes' : 'No' }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-medium text-green-700">Missing values handled:</span>
+        <span class="text-gray-800">{{ cleanResponse()?.missing_values_handled }}</span>
+      </div>
+    </div>
+  </div>
 </div>

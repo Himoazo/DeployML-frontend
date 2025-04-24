@@ -1,23 +1,81 @@
-<div class="form-container">
-    <p class="title">Register</p>
-    <div class="error"> {{errorDiv}} </div>
-    <form class="form" [formGroup]="signUpForm" (ngSubmit)="register()">
-      <div>
-        <input type="email" id="email" class="input" placeholder="Email" aria-label="email" formControlName="email">
-        <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
-          <small>Email is required and must be valid.</small>
-        </div>
-      </div>
-        
-      <div>
-        <input type="password" id="password" class="input" placeholder="Password" aria-label="password" formControlName="password">
-        <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
-          <small>Password is required.</small>
-        </div>
-      </div>
-        <p class="page-link">
-        <span class="page-link-label">Forgot Password?</span>
-      </p>
-      <button class="form-btn" type="submit" [disabled]="signUpForm.invalid">Log in</button>
-    </form>
+<div
+  class="mx-auto mt-12 w-full max-w-sm rounded-xl border border-gray-200 bg-white p-8 shadow-sm"
+>
+  <!-- title -->
+  <p class="mb-6 text-center text-2xl font-semibold text-gray-800">
+    Register
+  </p>
+
+  <!-- error banner -->
+  <div
+    *ngIf="errorDiv"
+    class="mb-4 rounded-md bg-red-50 px-4 py-2 text-center text-sm text-red-700"
+  >
+    {{ errorDiv }}
   </div>
+
+  <!-- form -->
+  <form
+    [formGroup]="signUpForm"
+    (ngSubmit)="register()"
+    class="space-y-5"
+  >
+    <!-- email -->
+    <div>
+      <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        aria-label="email"
+        formControlName="email"
+        class="block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+      />
+      <small
+        *ngIf="
+          signUpForm.get('email')?.invalid &&
+          signUpForm.get('email')?.touched
+        "
+        class="mt-1 block text-xs text-red-600"
+      >
+        Email is required and must be valid.
+      </small>
+    </div>
+
+    <!-- password -->
+    <div>
+      <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        aria-label="password"
+        formControlName="password"
+        class="block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+      />
+      <small
+        *ngIf="
+          signUpForm.get('password')?.invalid &&
+          signUpForm.get('password')?.touched
+        "
+        class="mt-1 block text-xs text-red-600"
+      >
+        Password is required.
+      </small>
+    </div>
+
+    <!-- forgot password link -->
+    <p class="text-right text-sm">
+      <a routerLink="/forgot-password" class="text-indigo-600 hover:underline">
+        Forgot Password?
+      </a>
+    </p>
+
+    <!-- submit -->
+    <button
+      type="submit"
+      [disabled]="signUpForm.invalid"
+      class="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      Sign up
+    </button>
+  </form>
+</div>
