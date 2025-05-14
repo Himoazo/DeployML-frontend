@@ -33,6 +33,7 @@
       class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150">
       Run Model
     </button>
+    <div *ngIf="progressBar"><mat-progress-bar mode="query"></mat-progress-bar></div>
   </form>
   
   <div *ngIf="result" class="mt-6 max-w-md mx-auto bg-slate-50 p-4 rounded-lg border border-slate-200">

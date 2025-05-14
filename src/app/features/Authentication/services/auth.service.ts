@@ -2,13 +2,13 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { LogIn, SignUp, Token, UserInfo } from '../types/auth.type';
-
+import { apiBaseUrl } from '../../../core/constants/endpoints.constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly url: string = "http://127.0.0.1:8000";
+  private readonly url: string = apiBaseUrl;
   private readonly httpClient = inject(HttpClient)
   private readonly _userInfo = signal<UserInfo | null>(null);
   readonly userInfo = this._userInfo.asReadonly();

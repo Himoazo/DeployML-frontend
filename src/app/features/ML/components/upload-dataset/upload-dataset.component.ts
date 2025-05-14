@@ -3,6 +3,7 @@ import { FormBuilder, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DatasetService } from '../../services/dataset.service';
 import { Dataset } from '../../types/dataset.type';
+import { AlertService } from '../../../../core/services/alert.service';
 
 @Component({
   selector: 'app-upload-dataset',
@@ -17,6 +18,7 @@ export class UploadDatasetComponent {
   datasetName: string = "";
   datasetTarget: string = "";
   errorDiv: string = "";
+  alert = inject(AlertService)
 
   selectFile(event: any): void {
     const file = event.target.files[0];
@@ -33,14 +35,17 @@ export class UploadDatasetComponent {
         target: this.datasetTarget.trim()
       }
       this.dataService.upload(dataset).subscribe({
-        next: res => this.dataService.getDatasets(),
+        next: res => {
+          this.dataService.getDatasets();
+          this.alert.alert("Datafilen har laddats upp");
+        },
         error: err => {
           console.error('Upload failed', err)
-          this.errorDiv = err.statusText;
+          this.alert.alert("Ett fel har inträffats");
         }
       });
     } else {
-      
+      this.alert.alert("Ett fel har inträffats");
     }
   }
 }
