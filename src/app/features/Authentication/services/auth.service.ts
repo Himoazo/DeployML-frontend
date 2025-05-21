@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { LogIn, SignUp, Token, UserInfo } from '../types/auth.type';
 import { apiBaseUrl } from '../../../core/constants/endpoints.constant';
 
@@ -15,7 +15,7 @@ export class AuthService {
   readonly userLoggedIn = signal<boolean>(false);
 
   //logging in
-  login(login: LogIn): Observable<boolean>{
+  login(login: LogIn): Observable<void>{
   const body = new HttpParams()
     .set('username', login.email.trim())
     .set('password', login.password.trim());
@@ -24,7 +24,7 @@ export class AuthService {
       body.toString(),
       {headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }), withCredentials: true }
     ).pipe(
-      switchMap(() => this.isLoggedIn())
+      tap(() => this.userLoggedIn.set(true))
     );
   }
 
