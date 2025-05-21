@@ -1,6 +1,6 @@
 <app-train-model></app-train-model>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 h-screen">
   <div *ngFor="let model of modelService.models()" class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition duration-300">
     <div class="p-5 space-y-3">
       <h3 class="font-bold text-lg text-gray-800 mb-2">{{model.model_name}}</h3>

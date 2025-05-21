@@ -1,12 +1,12 @@
 <header>
-    <nav class="bg-white shadow-md">
+    <nav class="bg-blue-900 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
             <div class="flex items-center">
               <!-- Logo could go here -->
               <div class="flex-shrink-0 flex items-center">
                 <!-- If you have a logo, add it here -->
-                <span class="text-indigo-600 font-bold text-xl">ML App</span>
+                <span class="text-white font-bold text-xl">DeployML</span>
               </div>
             </div>
             
@@ -15,32 +15,32 @@
               <ul class="flex space-x-8">
                 <li>
                   <a routerLink="" routerLinkActive="active" 
-                     class="text-gray-700 hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md"
+                     class="text-white hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md"
                      [routerLinkActiveOptions]="{exact: true}">
                     Hem
                   </a>
                 </li>
                 <li *ngIf="auth.userLoggedIn()">
                   <a routerLink="ml" routerLinkActive="active" 
-                     class="text-gray-700 hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md">
+                     class="text-white hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md">
                     Dashboard
                   </a>
                 </li>
                 <li *ngIf="!auth.userLoggedIn()">
                   <a routerLink="login" routerLinkActive="active" 
-                     class="text-gray-700 hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md">
+                     class="text-white hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md">
                     Logga in
                   </a>
                 </li>
                 <li *ngIf="!auth.userLoggedIn()">
                   <a routerLink="signup" routerLinkActive="active" 
-                     class="text-gray-700 hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md">
+                     class="text-white hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md">
                     Skapa konto
                   </a>
                 </li>
                 <li *ngIf="auth.userLoggedIn()">
                   <a (click)="logOut()" 
-                     class="text-gray-700 hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md cursor-pointer">
+                     class="text-white hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md cursor-pointer">
                     Logga ut
                   </a>
                 </li>
