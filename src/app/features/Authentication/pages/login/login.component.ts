@@ -35,7 +35,8 @@ export class LoginComponent {
     
     this.auth.login(loginInfo as LogIn).subscribe({
       next: () => {
-        this.router.navigate(["/"]);
+        this.auth.isLoggedIn();
+        this.router.navigate(["/ml"]);
       },
       error: (error)=>{
         this.errorDiv = "Felaktigt användarnamn/lösenord";
