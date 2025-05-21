@@ -29,23 +29,27 @@ export class LoginComponent {
     })
   });
   
-  /* login(): void{
+  login(): void{
     if (this.loginForm.invalid) return;
 
     const loginInfo = this.loginForm.value;
     
     this.auth.login(loginInfo as LogIn).subscribe({
-      next: () => {
-        this.router.navigate(["/ml"]);
-      },
+      next: (isLoggedIn) => {
+      if (isLoggedIn) {
+        this.router.navigate(['/ml']);
+      } else {
+        this.errorDiv = "Felaktigt användarnamn/lösenord";
+      }
+    },
       error: (error)=>{
         this.errorDiv = "Felaktigt användarnamn/lösenord";
         console.log(error)
       }
     });
-  } */
+  }
 
-  login(): void {
+  /* login(): void {
   if (this.loginForm.invalid) return;
 
   const loginInfo = this.loginForm.value;
@@ -59,6 +63,6 @@ export class LoginComponent {
       console.error(error);
     }
   });
-}
+} */
 
 }
