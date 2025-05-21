@@ -1,23 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { CleanRequest, CleanResponse, Dataset, DatasetInfo } from '../types/dataset.type';
+import { apiBaseUrl } from '../../../core/constants/endpoints.constant';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatasetService {
-  private readonly url: string = "http://127.0.0.1:8000/dataset";
+  private readonly url: string = `${apiBaseUrl}/dataset`;
   private readonly httpClient = inject(HttpClient);
   private readonly _datasets = signal<DatasetInfo[]>([]);
   readonly datasets = this._datasets.asReadonly();
   
-  getDatasets(): void{
+  /* getDatasets(): void{
     this.httpClient.get<DatasetInfo[]>(`${this.url}/all`, { withCredentials: true }).subscribe({
       next: response => this._datasets.set(response),
       error: err => console.log(err)
     });
+  } */
+  
+  getDatasets(): Observable<DatasetInfo[]>{
+    return this.httpClient.get<DatasetInfo[]>(`${this.url}/all`, { withCredentials: true })
+      .pipe(
+        tap(response => this._datasets.set(response)),
+        catchError(error => {
+          return throwError(() => error);
+        })
+      );
   }
 
   upload(dataset: Dataset): Observable<any>{

@@ -2,12 +2,13 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AlgorithmInfo } from '../types/algorithms.type';
+import { apiBaseUrl } from '../../../core/constants/endpoints.constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlgorithmService {
-  private readonly url: string = "http://127.0.0.1:8000/algo";
+  private readonly url: string = `${apiBaseUrl}/algo`
   private readonly httpClient = inject(HttpClient);
   
   createAlgorithm(newAlgo: AlgorithmInfo): Observable<string>{

@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TrainModelComponent } from '../../components/train-model/train-model.component';
 import { MLModelService } from '../../services/mlmodel.service';
+import { AlertService } from '../../../../core/services/alert.service';
 
 
 @Component({
@@ -13,8 +14,10 @@ import { MLModelService } from '../../services/mlmodel.service';
 })
 export class MLModelComponent {
   modelService = inject(MLModelService);
+  alert = inject(AlertService)
   models = this.modelService.models
-  modelFile: string = ""
+  modelFile: string = "";
+  errorDiv: string = "";
 
   ngOnInit() {
     this.modelService.getModels();
@@ -31,7 +34,7 @@ export class MLModelComponent {
         this.modelFile = url;
       },
       error: err => {
-        console.log(err);
+        this.errorDiv = "Det går inte att ladda ner denna modell"
       }
     })
   }

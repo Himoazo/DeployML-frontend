@@ -18,7 +18,10 @@ export class DatasetComponent {
   alert = inject(AlertService)
   
   ngOnInit() {
-    this.dataService.getDatasets();
+    this.dataService.getDatasets().subscribe({
+      next: () => { },
+      error: () => this.alert.alert("Träningsdatafiler kunde inte hämtas")
+    });
   }
 
   deleteDataset(id: string) {

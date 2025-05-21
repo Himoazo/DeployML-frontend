@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RunInput, RunResponse, TrainedModel, TrainRequest } from '../types/MLModel.type';
+import { apiBaseUrl } from '../../../core/constants/endpoints.constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MLModelService {
-  private readonly url: string = "http://127.0.0.1:8000/model";
+  private readonly url: string = `${apiBaseUrl}/model`;
   private readonly httpClient = inject(HttpClient)
   private readonly _models = signal<TrainedModel[]>([]);
   readonly models = this._models.asReadonly();

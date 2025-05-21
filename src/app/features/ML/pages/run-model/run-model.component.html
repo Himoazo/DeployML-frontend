@@ -45,3 +45,36 @@
     <span class="text-red-700">{{errorMsg}}</span>
   </div>
   
+
+  <!-- <form (ngSubmit)="runModel()">
+  <div>
+    <label for="model">Select Model</label>
+    <select name="model" id="model" [(ngModel)]="modelObject" 
+      (change)="inputIndexes()" required>
+      <option value="" disabled>Select model</option>
+      <option *ngFor="let mod of modelService.models()" [ngValue]="mod"> 
+        {{mod.model_name}} 
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <div *ngFor="let feature of featuresArr; let i = index">
+      <label for="feature-{{i}}">{{feature}}</label>
+      <input type="number" [(ngModel)]="inputValues[i]" 
+        name="feature-{{i}}" id="feature-{{i}}" required>
+    </div>
+  </div>
+
+  <button type="submit">Run Model</button>
+  <div *ngIf="progressBar"><mat-progress-bar mode="query"></mat-progress-bar></div>
+</form>
+
+<div *ngIf="result">
+  <h3>Result</h3>
+  <span>{{result.predictions}}</span>
+</div>
+
+<div *ngIf="errorMsg">
+  <span>{{errorMsg}}</span>
+</div> -->

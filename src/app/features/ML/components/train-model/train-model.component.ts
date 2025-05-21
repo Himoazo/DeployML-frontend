@@ -6,6 +6,7 @@ import { AlgorithmService } from '../../services/algorithm.service';
 import { MLModelService } from '../../services/mlmodel.service';
 import { AlgorithmInfo } from '../../types/algorithms.type';
 import { TrainRequest } from '../../types/MLModel.type';
+import { AlertService } from '../../../../core/services/alert.service';
 
 
 
@@ -19,7 +20,8 @@ export class TrainModelComponent {
   private fb = inject(FormBuilder);
   datasetService = inject(DatasetService);
   algoService = inject(AlgorithmService);
-  modelService = inject(MLModelService)
+  modelService = inject(MLModelService);
+  alert = inject(AlertService)
   datasetId: string = "";
   algorithms: AlgorithmInfo[] = [];
 
@@ -58,13 +60,12 @@ export class TrainModelComponent {
       this.modelService.train(request).subscribe({
         next: response => {
           this.modelService.getModels();
-          console.log("Model was trained: ", response)
+          this.alert.alert("Modellträning är klar");
         },
         error: err => {
-          console.log(err)
+          this.alert.alert("Det gick inte att träna modellen");
         }
       });
     }
-
   }
 }
