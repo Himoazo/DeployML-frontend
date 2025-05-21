@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { LogIn, Token } from '../../types/auth.type';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -28,14 +29,13 @@ export class LoginComponent {
     })
   });
   
-  login(): void{
+  /* login(): void{
     if (this.loginForm.invalid) return;
 
     const loginInfo = this.loginForm.value;
     
     this.auth.login(loginInfo as LogIn).subscribe({
       next: () => {
-        this.auth.isLoggedIn();
         this.router.navigate(["/ml"]);
       },
       error: (error)=>{
@@ -43,5 +43,22 @@ export class LoginComponent {
         console.log(error)
       }
     });
-  }
+  } */
+
+  login(): void {
+  if (this.loginForm.invalid) return;
+
+  const loginInfo = this.loginForm.value;
+
+  this.auth.login(loginInfo as LogIn).pipe(
+    switchMap(() => this.auth.getMyInfo()), 
+    tap(() => this.router.navigate(['/ml']))
+  ).subscribe({
+    error: (error) => {
+      this.errorDiv = "Felaktigt användarnamn/lösenord";
+      console.error(error);
+    }
+  });
+}
+
 }
