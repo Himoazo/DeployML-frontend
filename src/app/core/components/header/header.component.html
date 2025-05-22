@@ -27,10 +27,10 @@
                   </a>
                 </li>
                 <li *ngIf="!auth.userLoggedIn()">
-                  <a routerLink="login" routerLinkActive="active" 
+                  <button routerLink="login" routerLinkActive="active" 
                      class="text-white hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md">
                     Logga in
-                  </a>
+                </button>
                 </li>
                 <li *ngIf="!auth.userLoggedIn()">
                   <a routerLink="signup" routerLinkActive="active" 
@@ -85,12 +85,12 @@
                class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">
               Dashboard
             </a>
-            <a *ngIf="!auth.userLoggedIn()" 
+            <button *ngIf="!auth.userLoggedIn()" 
                routerLink="login" 
                routerLinkActive="bg-indigo-100 text-indigo-600"
                class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">
               Logga in
-            </a>
+          </button>
             <a *ngIf="!auth.userLoggedIn()" 
                routerLink="signup" 
                routerLinkActive="bg-indigo-100 text-indigo-600"
