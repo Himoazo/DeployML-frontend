@@ -39,10 +39,10 @@
                   </a>
                 </li>
                 <li *ngIf="auth.userLoggedIn()">
-                  <a (click)="logOut()" 
+                  <button (click)="logOut()" 
                      class="text-white hover:text-indigo-600 px-2 py-1 text-sm font-medium rounded-md cursor-pointer">
                     Logga ut
-                  </a>
+                </button>
                 </li>
               </ul>
             </div>
