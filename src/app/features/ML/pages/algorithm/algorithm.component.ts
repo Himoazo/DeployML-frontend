@@ -63,8 +63,8 @@ export class AlgorithmComponent {
       
       this.algoService.createAlgorithm(algorithm).subscribe({
         next: (result) => {
-          console.log('Algorithm created successfully', result);
           this.algorithmForm.reset();
+          alert(`Algoritmen ${algorithm.algorithm_name} har lagts till`);
           this.getAlgos();
         },
         error: (err) => console.error('Error creating algorithm', err)

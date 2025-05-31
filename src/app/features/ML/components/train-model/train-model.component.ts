@@ -33,7 +33,7 @@ export class TrainModelComponent {
 
   ngOnInit() {
     this.getAlgos();
-    this.datasetService.getDatasets();
+    this.datasetService.getDatasets().subscribe();
   }
 
   getAlgos(): void{

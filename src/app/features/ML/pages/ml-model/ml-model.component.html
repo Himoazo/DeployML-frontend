@@ -1,25 +1,21 @@
-<h1 class="text-xl font-semibold text-gray-700 mb-4 h-3 text-center">Train Model</h1>
+<h1 class="text-xl font-semibold text-gray-700 mb-4 h-3 text-center">Modellträning</h1>
 
 <app-train-model></app-train-model>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 h-screen">
   <div *ngFor="let model of modelService.models()" class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition duration-300">
     <div class="p-5 space-y-3">
-      <h3 class="font-bold text-lg text-gray-800 mb-2">{{model.model_name}}</h3>
+      <h2 class="font-bold text-lg text-gray-800 mb-2">{{model.model_name}}</h2>
       
       <div class="space-y-2 text-sm">
-       <!--  <p class="flex justify-between">
-          <span class="text-gray-500 font-medium">File name:</span>
-          <span class="text-gray-700">{{model.filename}}</span>
-        </p> -->
         
         <p class="flex justify-between">
-          <span class="text-gray-500 font-medium">Dataset:</span>
+          <span class="text-gray-500 font-medium">Data:</span>
           <span class="text-gray-700">{{model.dataset_name}}</span>
         </p>
         
         <p class="flex justify-between">
-          <span class="text-gray-500 font-medium">Algorithm:</span>
+          <span class="text-gray-500 font-medium">Algoritm:</span>
           <span class="text-gray-700">{{model.algorithm_name}}</span>
         </p>
         
@@ -29,7 +25,7 @@
         </p>
         
         <p class="flex justify-between">
-          <span class="text-gray-500 font-medium">Score:</span>
+          <span class="text-gray-500 font-medium">Betyg:</span>
           <span class="font-semibold text-indigo-600">{{model.score}}</span>
         </p>
       </div>
@@ -37,10 +33,10 @@
     
     <div class="flex border-t border-gray-200">
       <a [href]="modelFile" download="{{model.filename}}" class="flex-1 py-3 text-center text-green-600 hover:bg-green-50 font-medium transition duration-150 ease-in-out">
-        Download
+        Ladda ner
       </a>
       <button (click)="deleteModel(model.id)" class="flex-1 py-3 text-center text-red-600 hover:bg-red-50 font-medium transition duration-150 ease-in-out border-l border-gray-200">
-        Delete
+        Ta bort
       </button>
     </div>
   </div>

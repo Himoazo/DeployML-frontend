@@ -33,12 +33,12 @@ export class RunModelComponent {
 
   ngOnInit() {
     this.modelService.getModels();
-    this.dataService.getDatasets();
-    this.auth.getMyInfo();
+    this.dataService.getDatasets().subscribe();
+    this.auth.getMyInfo().subscribe();
   }
 
   inputIndexes() {
-    this.dataService.getDatasets();
+    this.dataService.getDatasets().subscribe();
     const datasets = this.dataService.datasets();
     const targetSet = datasets.find(x => x.id === this.modelObject?.dataset_id);
 

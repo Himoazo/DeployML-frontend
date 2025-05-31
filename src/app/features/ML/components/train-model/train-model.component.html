@@ -1,6 +1,6 @@
 <form [formGroup]="trainForm" (ngSubmit)="trainModel()" class="max-w-md mx-auto bg-white rounded-xl shadow-md p-6 space-y-6">
   <div class="space-y-2">
-    <label for="dataset" class="block text-sm font-medium text-slate-700">Dataset ID</label>
+    <label for="dataset" class="block text-sm font-medium text-slate-700">Träningsdatafil:</label>
     <select 
       name="dataset" 
       id="dataset" 
@@ -14,12 +14,12 @@
   </div>
   
   <div class="space-y-2 bg">
-    <label for="model_type" class="block text-sm font-medium text-slate-700">Model Type</label>
+    <label for="model_type" class="block text-sm font-medium text-slate-700">Algoritm:</label>
     <select 
       id="model_type" 
       formControlName="model_type" 
       class="block w-full px-4 py-2 text-base border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm">
-      <option value="">Select algorithm</option>
+      <option value="">Välj algoritm</option>
       <option *ngFor="let algo of algorithms" [value]="algo.id" class="py-1">
         {{ algo.algorithm_name }}
       </option>
@@ -27,7 +27,7 @@
   </div>
   
   <div class="space-y-2">
-    <label for="name_of_model" class="block text-sm font-medium text-slate-700">Model Name</label>
+    <label for="name_of_model" class="block text-sm font-medium text-slate-700">Modellnamn:</label>
     <input 
       type="text" 
       id="name_of_model" 
@@ -35,7 +35,7 @@
       placeholder="Enter a name for your model"
       class="block w-full px-4 py-2 text-base border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm">
     <div *ngIf="trainForm.get('name_of_model')?.invalid && trainForm.get('name_of_model')?.touched" class="text-sm text-red-600 mt-1">
-      Model name is required
+      Modellen måste få ett namn
     </div>
   </div>
   
@@ -43,6 +43,6 @@
     type="submit" 
     [disabled]="trainForm.invalid"
     class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
-    Train Model
+    Träna modell
   </button>
 </form>

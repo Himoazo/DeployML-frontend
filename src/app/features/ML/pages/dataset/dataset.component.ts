@@ -5,11 +5,13 @@ import { UploadDatasetComponent } from '../../components/upload-dataset/upload-d
 import { CleanDatasetComponent } from '../../components/clean-dataset/clean-dataset.component';
 import { DatasetService } from '../../services/dataset.service';
 import { AlertService } from '../../../../core/services/alert.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 
 @Component({
   selector: 'app-dataset',
-  imports: [CommonModule, FormsModule, UploadDatasetComponent, CleanDatasetComponent],
+  imports: [CommonModule, FormsModule, UploadDatasetComponent, CleanDatasetComponent, MatTooltipModule],
   templateUrl: './dataset.component.html',
   styleUrl: './dataset.component.scss'
 })
