@@ -25,7 +25,7 @@ export class RunModelComponent {
   
   modelObject: TrainedModel | null = null;
   featuresArr: string[] | null = null
-  inputValues: number[] = [];
+  inputValues: {[key: string]: string} = {};
   runInput: string = "";
   result: RunResponse | null = null;
   errorMsg: string = "";
@@ -38,13 +38,13 @@ export class RunModelComponent {
   }
 
   inputIndexes() {
+    this.dataService.getDatasets();
     const datasets = this.dataService.datasets();
     const targetSet = datasets.find(x => x.id === this.modelObject?.dataset_id);
 
     if (targetSet) {
       const target: DatasetInfo = targetSet;
       this.featuresArr = target.feature_names;
-      this.inputValues = new Array(this.featuresArr.length).fill(null);
     }
   }
 

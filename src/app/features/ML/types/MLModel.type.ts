@@ -19,7 +19,7 @@ export type TrainedModel = {
   algorithm_name: string;
 }
 
-export type RunInput = number[][];
+export type RunInput = { } [];
 
 export type RunResponse = {
   predictions: number[];

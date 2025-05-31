@@ -22,8 +22,8 @@
       <div *ngFor="let feature of featuresArr; let i = index" class="space-y-2">
         <label for="feature-{{i}}" class="block text-sm font-medium text-slate-700"> {{feature}} </label>
         <input 
-          type="number" 
-          [(ngModel)]="inputValues[i]" 
+          type="text" 
+          [(ngModel)]="inputValues[feature]" 
           name="feature-{{i}}" 
           id="feature-{{i}}"
           required
