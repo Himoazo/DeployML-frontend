@@ -5,7 +5,7 @@
     Välkommen tillbaka
   </h1>
 
-  <!-- error banner -->
+ 
   <div
     *ngIf="errorDiv"
     class="mb-4 rounded-md bg-red-50 px-4 py-2 text-center text-sm text-red-700"
@@ -13,13 +13,13 @@
     {{ errorDiv }}
   </div>
 
-  <!-- form -->
+ 
   <form
     class="space-y-5"
     [formGroup]="loginForm"
     (ngSubmit)="login()"
   >
-    <!-- email -->
+ 
     <div>
       <input
         type="email"
@@ -37,7 +37,7 @@
         "
         class="mt-1 block text-xs text-red-600"
       >
-        Email is required and must be valid.
+        E-post måste anges.
       </small>
     </div>
 
@@ -46,7 +46,7 @@
       <input
         type="password"
         id="password"
-        placeholder="Password"
+        placeholder="Lösenord"
         aria-label="password"
         formControlName="password"
         class="block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
@@ -59,7 +59,7 @@
         "
         class="mt-1 block text-xs text-red-600"
       >
-        Password is required.
+        Lösenord är obligatoriskt.
       </small>
     </div>
 
@@ -79,15 +79,8 @@
       [disabled]="loginForm.invalid"
       class="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      Log in
+      Logga in
     </button>
   </form>
 
-  <!-- sign‑up hint -->
-  <!-- <p class="mt-6 text-center text-sm">
-    Don’t have an account?
-    <a routerLink="/signup" class="font-medium text-indigo-600 hover:underline">
-      Sign up
-    </a>
-  </p> -->
 </div>

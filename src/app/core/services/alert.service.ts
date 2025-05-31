@@ -13,7 +13,8 @@ export class AlertService {
   
   alert(message: string) {
     this._snackBar.open(message, "X", {
-      duration: 5000
+      duration: 5000,
+      panelClass: ['snackbarClass']
     });
   }
 }
