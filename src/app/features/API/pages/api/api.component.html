@@ -30,6 +30,7 @@
       
       <div class="space-y-2">
         <div *ngFor="let model of modelService.models()" class="bg-gray-50 p-3 rounded-md border border-gray-200">
+          <h3 class="font-medium text-gray-800 mb-2">{{model.model_name}}</h3>
           <code class="font-mono text-blue-600">{{ `${baseUrl}/model/run/${model.id}` }}</code>
         </div>
       </div>
