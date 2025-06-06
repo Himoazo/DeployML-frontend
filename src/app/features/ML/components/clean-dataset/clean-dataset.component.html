@@ -85,10 +85,7 @@
         <span class="font-medium text-green-700">Antal rader efter rengöring:</span>
         <span class="text-gray-800">{{ cleanResponse()?.rows_after_cleaning }}</span>
       </div>
-      <!-- <div class="flex justify-between">
-        <span class="font-medium text-green-700">Kolumner:</span>
-        <span class="text-gray-800">{{ cleanResponse()?.columns }}</span>
-      </div> -->
+
       <div class="flex justify-between">
         <span class="font-medium text-green-700">Borttagna dubbletter:</span>
         <span class="text-gray-800">{{ cleanResponse()?.duplicates_removed ? 'Ja' : 'Nej' }}</span>

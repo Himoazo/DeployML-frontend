@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Component, inject} from '@angular/core';
+import {inject} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Injectable({
   providedIn: 'root'
